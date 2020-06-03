@@ -107,3 +107,28 @@ export function getBubbleSortAnimations(array) {
   return animations;
 }
 //* BUBBLE SORT DONE
+
+//* INSERTION SORT 
+export function getInsertionSortAnimations(array) {
+  const animations = []
+  if (array.length <= 1) return array;
+  let key = 0;
+  let j = 0;
+  for (let i = 0; i < array.length; i++) {
+    key = array[i];
+    j = i - 1;
+    while (j >= 0 && array[j] > key) {
+      animations.push([i, array[i]]);
+      array[j + 1] = array[j];
+      animations.push([j + 1, array[j + 1]]);
+      j = j - 1;
+    }
+    array[j + 1] = key;
+    animations.push([j + 1, key]);
+    animations.push([i, array[i]]);
+  }
+  console.log('the sorted array is:')
+  console.log(array);
+  return animations;
+}
+//* INSERTION SORT DONE

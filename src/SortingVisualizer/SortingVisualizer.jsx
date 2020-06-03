@@ -1,6 +1,14 @@
 import React from 'react';
-import { getMergeSortAnimations, getBubbleSortAnimations } from '../sortingAlgorithms/sortingAlgorithms.js';
-import { getLinearSearchAnimations } from '../searchingAlgorithms/searchingAlgorithms.js';
+import {
+  getMergeSortAnimations,
+  getBubbleSortAnimations,
+  getInsertionSortAnimations
+} from '../sortingAlgorithms/sortingAlgorithms.js';
+import {
+  getLinearSearchAnimations,
+  getBinarySearchAnimations,
+  getSortedAnimations
+} from '../searchingAlgorithms/searchingAlgorithms.js';
 import './SortingVisualizer.css';
 
 // Change this value for the speed of the animations.
@@ -77,6 +85,21 @@ export default class SortingVisualizer extends React.Component {
     }
   }
 
+  insertionSort() {
+    const animations = getInsertionSortAnimations(this.state.array);
+    console.log('the animated array is:')
+    console.log(animations)
+    // TODO: Design Display logic
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName('array-bar');
+      setTimeout(() => {
+        const [barOneIdx, newHeight] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        barOneStyle.height = `${newHeight}px`;
+      }, i * ANIMATION_SPEED_MS);
+    }
+  }
+
   quickSort() {
     // We leave it as an exercise to the viewer of this code to implement this method.
   }
@@ -85,11 +108,14 @@ export default class SortingVisualizer extends React.Component {
     // We leave it as an exercise to the viewer of this code to implement this method.
   }
 
+
+
   //* BubbleSort Visualizer
   bubbleSort() {
     const animations = getBubbleSortAnimations(this.state.array);
     console.log('the animated array is:')
     console.log(animations)
+
     for (let i = 0; i < animations.length; i++) {
       const arrayBars = document.getElementsByClassName('array-bar');
       const isColorChange = i % 3 === 0;
@@ -160,6 +186,27 @@ export default class SortingVisualizer extends React.Component {
       }
     }
   }
+  binarySearch() {
+    const animations = getSortedAnimations(this.state.array, 100);
+    console.log('the animated array is:')
+    console.log(animations)
+    // DISPLAY the sorted array in red color
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName('array-bar');
+      let color = PRIMARY_COLOR;
+      setTimeout(() => {
+        const [barOneIdx, newHeight] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        barOneStyle.height = `${newHeight}px`;
+        barOneStyle.backgroundColor = color;
+      }, i * 20);
+    }
+    // Display the Binary Search
+    const animations2 = getBinarySearchAnimations(this.state.array, 100)
+    console.log('the animated array is:')
+    console.log(animations2)
+    // TODO: Binary Search logic
+  }
 
   render() {
     const { array } = this.state;
@@ -181,7 +228,9 @@ export default class SortingVisualizer extends React.Component {
         <button onClick={() => this.quickSort()}>Quick Sort</button>
         <button onClick={() => this.heapSort()}>Heap Sort</button>
         <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
+        <button onClick={() => this.insertionSort()}>Insertions Sort</button>
         <button onClick={() => this.linearSearch()}>Linear search for 100</button>
+        <button onClick={() => { this.binarySearch() }}>Binary Search for 100</button>
         <button onClick={() => this.testSortingAlgorithms()}>
           Test Sorting Algorithms (BROKEN)
         </button>

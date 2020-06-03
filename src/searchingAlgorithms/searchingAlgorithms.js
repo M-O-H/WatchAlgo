@@ -15,4 +15,24 @@ export function getLinearSearchAnimations(array, find) {
     console.log('100 NOT found!')
     return animations;
 }
-  //* LINEAR SEARCH DONE
+//* LINEAR SEARCH DONE
+
+//* BINARY SEARCH
+export function getSortedAnimations(array, find) {
+    const animations = []
+    console.log('Reached the Binary search!');
+    //sort the array first
+    const javaScriptSortedArray = array.slice().sort((a, b) => a - b);
+    for (let i = 0; i < javaScriptSortedArray.length; i++) {
+        animations.push([i, javaScriptSortedArray[i]])
+    }
+    return animations;
+}
+export function getBinarySearchAnimations(array, find) {
+    const animations = []
+    console.log('Reached the Binary search!');
+    //sort the array first
+    const javaScriptSortedArray = array.slice().sort((a, b) => a - b);
+    return animations;
+}
+  //* BINARY SEARCH DONE

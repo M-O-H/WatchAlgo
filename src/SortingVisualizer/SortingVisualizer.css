@@ -1,11 +1,12 @@
 .array-container {
-  position: absolute;
-  left: 100px;
+  /* position: absolute; */
+  /* left: 100px; */
   /* top: 100px; */
+  background-image: linear-gradient(#fff,#000);
 }
 
 .array-bar {
-  width: 2px;
+  width: 8px;
   display: inline-block;
   margin: 0 1px;
 }
